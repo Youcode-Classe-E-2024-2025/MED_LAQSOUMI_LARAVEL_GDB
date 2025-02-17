@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,7 +17,20 @@ class AuthController extends Controller
     
     public function register(Request $request)
     {
-        $validatedData = $request->validate([]); 
+        $request->validate([]);
+        // Create a new user
+        $validatedData = $request->validate([
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'remember_token' => 'required',
+        ]);
+        $user = User::create([
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'remember_token' => $validatedData['remember_token'],
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 
     
