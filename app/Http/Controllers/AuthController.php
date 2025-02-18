@@ -17,6 +17,7 @@ class AuthController extends Controller
         $validatedData['name'] = $request->input('name');
         $validatedData['email'] = $request->input('email');
         $validatedData['password'] = Hash::make($request->input('password'));
+        $validatedData['remember_token'] = Hash::make($request->input('email'));
         $validatedData['role'] = 'user';
         if(User::create($validatedData)){
             return redirect()->route('login')->with('success', 'Registration successful!');
