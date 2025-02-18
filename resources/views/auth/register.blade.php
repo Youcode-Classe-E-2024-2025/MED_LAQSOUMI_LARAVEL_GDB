@@ -10,7 +10,7 @@
 <body class="flex items-center justify-center h-screen bg-gray-100">
     <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h1 class="text-2xl font-bold mb-6 text-center">Register</h1>
-        <form action="/register" method="POST">
+        <form action="{{ route('register') }}" method="POST">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>

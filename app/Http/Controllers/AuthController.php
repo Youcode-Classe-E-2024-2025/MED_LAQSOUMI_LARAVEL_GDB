@@ -16,22 +16,27 @@ class AuthController extends Controller
 
     
     public function register(Request $request)
-    {
-        $request->validate([]);
-        // Create a new user
+{
+    if ($request->isMethod('POST')) {
+        // Validate the incoming request data
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:8',
-            'remember_token' => 'required',
-        ]);
-        $user = User::create([
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-            'remember_token' => $validatedData['remember_token'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed', // Ensure you have a confirmation field in your form
         ]);
 
+        var_dump($validatedData);
+        // Hash the password before saving
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Create the user
+        User::create($validatedData);
+
         return redirect()->route('login')->with('success', 'Registration successful!');
+    } else {
+        return view('auth.register');
     }
+}
 
     
     public function showLoginForm()
