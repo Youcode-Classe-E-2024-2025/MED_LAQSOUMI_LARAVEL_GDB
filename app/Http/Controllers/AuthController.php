@@ -36,14 +36,14 @@ class AuthController extends Controller
 {
     if ($request->isMethod('POST')) {
         $validatedData = $request->validate([]);
-        $validatedData['email'] = $request->input('email');
-        $validatedData['password'] = $request->input('password');
-
-        if (User::where($validatedData)->exists()) {
-            session()->regenerate();
-            return redirect()->route('dashboard')->with('success', 'Login successful!');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        if (user::where('email', $email)->exists() && Hash::check($password, User::where('email', $email)->first()->password)) {
+            $request->session()->put('email', $email);
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
         } else {
-            return redirect()->back()->with('error', 'Invalid credentials');
+            return redirect()->back()->with('error', 'Invalid login details!');
         }
     }else{
         return view('auth.login');
