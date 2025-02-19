@@ -54,8 +54,8 @@ class AuthController extends Controller
     
     public function logout(Request $request)
     {
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+    $request->session()->flush();
+    return redirect()->route('login')->with('success', 'See you later!');
     }
 
     public function dashboard()
