@@ -11,7 +11,7 @@ class AuthController extends Controller
     
  
     public function register(Request $request)
-{
+    {
     if ($request->isMethod('POST')) {
         $validatedData = $request->validate([]);
         $validatedData['name'] = $request->input('name');
@@ -27,32 +27,48 @@ class AuthController extends Controller
     } else {
         return view('auth.register');
     }
-}
+    }
 
-
-    
-   
     public function login(Request $request)
-{
+    {
     if ($request->isMethod('POST')) {
-        $validatedData = $request->validate([]);
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
         $email = $request->input('email');
         $password = $request->input('password');
-        if (user::where('email', $email)->exists() && Hash::check($password, User::where('email', $email)->first()->password)) {
+        $user = User::where('email', $email)->first();
+        if ($user && Hash::check($password, $user->password)) {
             $request->session()->put('email', $email);
             $request->session()->regenerate();
+            $request->session()->put('role', $user->role);
             return redirect()->route('dashboard');
         } else {
             return redirect()->back()->with('error', 'Invalid login details!');
         }
-    }else{
+    } else {
         return view('auth.login');
     }
-}
+    }
     
     public function logout(Request $request)
     {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+    }
+
+    public function dashboard()
+    {
+    if (session()->has('email')) {
+        $sessionRole = session()->get('role');
+        if ($sessionRole == 'admin') {
+            return view('dashboard.admin');
+        } else {
+            return view('dashboard.user');
+        }
+    } else {
+        return redirect()->route('login')->with('error', 'Please login to access the dashboard!');
+    }
     }
 }
