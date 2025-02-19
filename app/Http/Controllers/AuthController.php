@@ -43,7 +43,7 @@ class AuthController extends Controller
                 $request->session()->put('email', $email);
                 $request->session()->regenerate();
                 $request->session()->put('role', $user->role);
-                return redirect()->route('dashboard');
+                return redirect()->route('dashboard')->with('success', 'Welcome back '. $user->name);
             } else {
                 return redirect()->back()->with('error', 'Invalid login details!');
             }
