@@ -35,7 +35,7 @@
     </header>
 
     <main class="container mx-auto mt-8 px-4 flex-1">
-        <h2 class="text-2xl font-semibold text-gray-800">Welcome, {{ $name }}</h2>
+        @include('layouts.success-message')
         
 
 
