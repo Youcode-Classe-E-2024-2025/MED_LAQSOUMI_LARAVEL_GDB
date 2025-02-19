@@ -20,6 +20,7 @@
             </h1>
             <nav>
                 <ul class="flex space-x-6">
+                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
                     <li><a href="{{ route('admin.books') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
                     <li><a href="{{ route('admin.users') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
                     <li><a href="{{ route('admin.reports') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">Reports</a></li>
