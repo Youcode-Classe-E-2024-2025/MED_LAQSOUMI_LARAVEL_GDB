@@ -16,7 +16,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
-// Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 // Route::get('/edit-profile', [AuthController::class, 'editProfile'])->name('edit-profile');
 // Route::post('/edit-profile', [AuthController::class, 'editProfile']);
 // Route::get('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
