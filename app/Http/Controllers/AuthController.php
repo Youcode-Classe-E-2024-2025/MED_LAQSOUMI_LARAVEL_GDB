@@ -78,6 +78,7 @@ class AuthController extends Controller
                 'email' => session()->get('email'),
                 'role' => $sessionRole,
                 'name' => User::where('email', session()->get('email'))->first()->name,
+                'created_at' => User::where('email', session()->get('email'))->first()->created_at,
                 'books' => $books // Pass books to the view
             ]);
         }
