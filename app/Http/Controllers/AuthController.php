@@ -63,7 +63,7 @@ class AuthController extends Controller
         if (session()->has('email')) {
             $sessionRole = session()->get('role');
             if ($sessionRole == 'admin') {
-                return view('dashboard.admin', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
+                return view('dashboard.admin.admin', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
             } else {
                 return view('dashboard.user', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
             }
