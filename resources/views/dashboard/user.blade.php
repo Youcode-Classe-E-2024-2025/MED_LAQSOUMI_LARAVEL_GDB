@@ -43,7 +43,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <p class="text-gray-600">Email: {{ $email }}</p>
-                    {{-- <p class="text-gray-600">Member since: {{ auth()->user()->created_at->format('M d, Y') }}</p> --}}
+                    <p class="text-gray-600">Member since: {{ $created }}</p>
                 </div>
             </div>
         </div>
