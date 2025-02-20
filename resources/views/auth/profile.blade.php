@@ -42,7 +42,7 @@
 
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700">{{ __('Name') }}</label>
-                    <input id="name" type="text" class="w-full mt-1 p-2 border border-gray-300 rounded-md @error('name') border-red-500 @enderror" name="name" value="{{ $name }}" required autocomplete="name" autofocus>
+                    <input id="name" type="text" class="w-full mt-1 p-2 border rounded-md @error('name') border-red-500 @enderror" name="name" value="{{ $name }}" required autocomplete="name" autofocus>
                     @error('name')
                         <span class="text-red-500 text-sm mt-1" role="alert">
                             <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
 
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700">{{ __('Email Address') }}</label>
-                    <input id="email" type="email" class="w-full mt-1 p-2 border border-gray-300 rounded-md @error('email') border-red-500 @enderror" name="email" value="{{ $email }}" required autocomplete="email">
+                    <input id="email" type="email" class="w-full mt-1 p-2 border rounded-md @error('email') border-red-500 @enderror" name="email" value="{{ $email }}" required autocomplete="email">
                     @error('email')
                         <span class="text-red-500 text-sm mt-1" role="alert">
                             <strong>{{ $message }}</strong>

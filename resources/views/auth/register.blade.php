@@ -16,7 +16,7 @@
     <header class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-6 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-blue-600">
-                <a href="{{ route('welcome') }}"><span class="text-indigo-600">Lib</span>Ement</a>
+                <a href=""><span class="text-indigo-600">Lib</span>Ement</a>
             </h1>
             <nav>
                 <ul class="flex space-x-6">
