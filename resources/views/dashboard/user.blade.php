@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Head section remains the same -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Libement System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <header class="bg-white shadow-md">
@@ -12,7 +21,7 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">Books</a></li>
-                    <li><a href="{{ route('my.books') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li>
+                    {{-- <li><a href="{{ route('my.books') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li> --}}
                     <li><a href="{{ route('profile') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
@@ -30,17 +39,17 @@
         
         <!-- Display User Information -->
         <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-4">Welcome, {{ auth()->user()->name }}</h2>
+            <h2 class="text-2xl font-semibold mb-4">Welcome, {{ $name }}</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <p class="text-gray-600">Email: {{ auth()->user()->email }}</p>
-                    <p class="text-gray-600">Member since: {{ auth()->user()->created_at->format('M d, Y') }}</p>
+                    <p class="text-gray-600">Email: {{ $email }}</p>
+                    {{-- <p class="text-gray-600">Member since: {{ auth()->user()->created_at->format('M d, Y') }}</p> --}}
                 </div>
             </div>
         </div>
 
         <!-- Book Search -->
-        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+        {{-- <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-xl font-semibold mb-4">Search for Books</h3>
             <form action="{{ route('books.search') }}" method="GET" class="flex gap-4">
                 <input type="text" 
@@ -50,10 +59,10 @@
                        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Search</button>
             </form>
-        </div>
+        </div> --}}
 
         <!-- Search Results -->
-        @if(isset($books) && $books->count() > 0)
+        {{-- @if(isset($books) && $books->count() > 0)
         <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @foreach($books as $book)
             <div class="bg-white p-4 rounded-lg shadow-md">
@@ -74,11 +83,16 @@
         <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
             <p class="text-gray-600">No books found matching your search criteria.</p>
         </div>
-        @endif
+        @endif --}}
     </main>
 
     <footer class="mt-16 bg-gray-100 border-t border-gray-200">
-        <!-- Footer section remains the same -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center text-gray-600">
+                <p>&copy; {{ date('Y') }} Libement System. All rights reserved.</p>
+                <p class="mt-2">Empowering knowledge seekers worldwide.</p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
