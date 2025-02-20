@@ -25,7 +25,7 @@
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Reports</a></li>
                     <li>
-                        <form action="" method="POST">
+                        <form action="/logout" method="POST">
                             @csrf
                             <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
                         </form>
