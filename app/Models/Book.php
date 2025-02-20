@@ -25,7 +25,23 @@ class Book extends Model
         return self::all();
     }
 
-    public static function findbyId(){
-        return self::id();
+    public static function findById($id)
+    {
+        return self::find($id);
+    }
+
+    public static function createBook($data)
+    {
+        return self::create($data);
+    }
+
+    public static function updateBook($id, $data)
+    {
+        $book = self::find($id);
+        if ($book) {
+            $book->update($data);
+            return $book;
+        }
+        return null;
     }
 }

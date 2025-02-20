@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table){
             $table->id();
-            $table->string('book');
+            $table->string('title');
             $table->string('author');
             $table->text('description');
             $table->decimal('price', 8, 2);
             $table->string('cover');
             $table->string('isbn');
+            $table->timestamps(); // Add this line to include created_at and updated_at columns
         });
     }
 
