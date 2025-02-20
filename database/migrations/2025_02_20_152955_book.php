@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table){
             $table->id();
-            $table->title();
-            $table->author();
-            $table->description();
-            $table->price();
-            $table->cover();
-            $table->isbn();
+            $table->string('book');
+            $table->string('author');
+            $table->text('description');
+            $table->decimal('price', 8, 2);
+            $table->string('cover');
+            $table->string('isbn');
         });
     }
 
