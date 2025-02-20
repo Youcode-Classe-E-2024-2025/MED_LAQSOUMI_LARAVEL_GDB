@@ -62,7 +62,7 @@ class User extends Authenticatable
     }
     
 
-    public static function create($data){
+    public static function createUser($data){
         return self::create($data);
     }
     
