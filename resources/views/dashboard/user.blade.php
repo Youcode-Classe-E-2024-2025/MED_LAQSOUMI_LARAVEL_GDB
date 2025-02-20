@@ -25,7 +25,7 @@
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('dashboard') }}"
                             class="text-gray-600 hover:text-blue-600 transition duration-300">Books</a></li>
-                    {{-- <li><a href="{{ route('my.books') }}" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li> --}}
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li>
                     <li><a href="{{ route('profile') }}"
                             class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
                     <li>

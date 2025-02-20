@@ -20,7 +20,8 @@
             </h1>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
+                    @if($role === 'user')
+                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">books</a></li>
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li>
                     <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
                     <li>
@@ -29,6 +30,18 @@
                             <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
                         </form>
                     </li>
+                    @elseif($role === 'admin')
+                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Reports</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
+                        </form>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>
