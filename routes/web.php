@@ -2,11 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-
-
-
-
-
+use App\Http\Controllers\BookController;
 
 // SYSTEM AUTHENTICATION
 Route::get('/', function () {return view('/welcome');})->name('welcome');
@@ -18,5 +14,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 // Route::get('/edit-profile', [AuthController::class, 'editProfile'])->name('edit-profile');
-// Route::post('/edit-profile', [AuthController::class, 'editProfile']);
-// Route::get('/change-password', [AuthController::class, 'changePassword'])->name('change-password');
+
+Route::get('/books', [BookController::class, 'books'])->name('books');
+Route::get('/books/create', [BookController::class, 'createBook'])->name('create-book');
+Route::post('/books/create', [BookController::class, 'createBook']);
+Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('edit-book');
+Route::post('/books/edit/{id}', [BookController::class, 'editBook']);
+Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');
+Route::post('/books/delete/{id}', [BookController::class, 'deleteBook']);

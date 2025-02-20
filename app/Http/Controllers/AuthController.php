@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Book;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -60,18 +61,30 @@ class AuthController extends Controller
     }
 
     public function dashboard()
-    {
-        if (session()->has('email')) {
-            $sessionRole = session()->get('role');
-            if ($sessionRole == 'admin') {
-                return view('dashboard.admin.admin', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
-            } else {
-                return view('dashboard.user', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
-            }
+{
+    if (session()->has('email')) {
+        $sessionRole = session()->get('role');
+        $books = Book::all(); // Fetch all books
+
+        if ($sessionRole == 'admin') {
+            return view('dashboard.admin.admin', [
+                'email' => session()->get('email'),
+                'role' => $sessionRole,
+                'name' => User::where('email', session()->get('email'))->first()->name,
+                'books' => $books // Pass books to the view
+            ]);
         } else {
-            return redirect()->route('login')->with('error', 'Please login to access');
+            return view('dashboard.user', [
+                'email' => session()->get('email'),
+                'role' => $sessionRole,
+                'name' => User::where('email', session()->get('email'))->first()->name,
+                'books' => $books // Pass books to the view
+            ]);
         }
+    } else {
+        return redirect()->route('login')->with('error', 'Please login to access');
     }
+}
 
     public function profile ()
     {
