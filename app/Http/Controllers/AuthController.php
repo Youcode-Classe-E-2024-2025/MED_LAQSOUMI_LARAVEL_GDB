@@ -61,7 +61,7 @@ class AuthController extends Controller
     }
 
     public function dashboard()
-{
+    {
     if (session()->has('email')) {
         $sessionRole = session()->get('role');
         $books = Book::all(); // Fetch all books
@@ -85,7 +85,7 @@ class AuthController extends Controller
     } else {
         return redirect()->route('login')->with('error', 'Please login to access');
     }
-}
+    }
 
     public function profile ()
     {
@@ -96,14 +96,13 @@ class AuthController extends Controller
         }
     }
 
-
     public function editProfile(Request $request)
     {
         if ($request->isMethod('POST')) {
             $validatedData = $request->validate([
-                'name' => 'required',
+                'name' => 'required|string|max:50|min:6',
                 'email' => 'required|email',
-                'password' => 'required',
+                'password' => 'required|min:6',
             ]);
             $user = User::where('email', session()->get('email'))->first();
             $user->name = $request->input('name');

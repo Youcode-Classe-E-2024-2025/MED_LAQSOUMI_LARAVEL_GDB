@@ -36,6 +36,8 @@
     <div class="container mx-auto px-4 py-6">
         <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-semibold mb-4">{{ __('Profile') }}</h2>
+            @include('layouts.success-message')
+            @include('layouts.error-message')
             <form method="POST" action="{{ route('editProfile') }}">
                 @csrf
 
