@@ -20,12 +20,12 @@ class Book extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function findAll()
+    public static function findAll()
     {
         return self::all();
     }
 
-    public function findbyId(){
+    public static function findbyId(){
         return self::id();
     }
 }
