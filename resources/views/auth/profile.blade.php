@@ -36,9 +36,8 @@
     <div class="container mx-auto px-4 py-6">
         <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-semibold mb-4">{{ __('Profile') }}</h2>
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('editProfile') }}">
                 @csrf
-                @method('PUT')
 
                 <div class="mb-4">
                     <label for="name" class="block text-gray-700">{{ __('Name') }}</label>
@@ -54,6 +53,16 @@
                     <label for="email" class="block text-gray-700">{{ __('Email Address') }}</label>
                     <input id="email" type="email" class="w-full mt-1 p-2 border rounded-md @error('email') border-red-500 @enderror" name="email" value="{{ $email }}" required autocomplete="email">
                     @error('email')
+                        <span class="text-red-500 text-sm mt-1" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="password" class="block text-gray-700">{{ __('Password') }}</label>
+                    <input id="password" type="password" class="w-full mt-1 p-2 border rounded-md @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password">
+                    @error('password')
                         <span class="text-red-500 text-sm mt-1" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

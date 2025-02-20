@@ -13,7 +13,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
-// Route::get('/edit-profile', [AuthController::class, 'editProfile'])->name('edit-profile');
+Route::post('/profile/edit', [AuthController::class, 'editProfile'])->name('editProfile');
 
 Route::get('/books', [BookController::class, 'books'])->name('books');
 Route::get('/books/create', [BookController::class, 'createBook'])->name('create-book');

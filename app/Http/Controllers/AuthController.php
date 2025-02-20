@@ -97,4 +97,28 @@ class AuthController extends Controller
     }
 
 
+    public function editProfile(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $user = User::where('email', session()->get('email'))->first();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+            if ($user->save()) {
+                session()->put('email', $user->email);
+                return redirect()->route('profile')->with('success', 'Profile updated successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Profile update failed!');
+            }
+        } else {
+            return view('auth.edit-profile', ['email' => session()->get('email'), 'name' => User::where('email', session()->get('email'))->first()->name]);
+        }
+    }
+
+
 }
