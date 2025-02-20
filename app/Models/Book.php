@@ -44,4 +44,15 @@ class Book extends Model
         }
         return null;
     }
+
+    public static function deleteBook($id)
+    {
+        $book = self::find($id);
+        if ($book) {
+            $book->delete();
+            return true;
+        }
+        return false;
+    }
+
 }
