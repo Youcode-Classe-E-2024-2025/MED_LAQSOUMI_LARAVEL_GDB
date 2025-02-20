@@ -68,7 +68,7 @@ class AuthController extends Controller
                 return view('dashboard.user', ['email' => session()->get('email'), 'role' => $sessionRole, 'name' => User::where('email', session()->get('email'))->first()->name]);
             }
         } else {
-            return redirect()->route('login')->with('error', 'Please login to access the dashboard!');
+            return redirect()->route('login')->with('error', 'Please login to access');
         }
     }
 
@@ -77,7 +77,7 @@ class AuthController extends Controller
         if (session()->has('email')) {
             return view('auth.profile', ['email' => session()->get('email'), 'name' => User::where('email', session()->get('email'))->first()->name]);
         } else {
-            return redirect()->route('login')->with('error', 'Please login to access the profile!');
+            return redirect()->route('login')->with('error', 'Please login to access');
         }
     }
 

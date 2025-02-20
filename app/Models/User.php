@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Book::class);
     }
+
+    public static function findAll(){
+        return self::all();
+    }
+
+
 }
