@@ -15,21 +15,17 @@ class Book extends Model
         'isbn',
     ];
 
-    // Define a relationship with the User model (assuming a book belongs to a user)
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Accessor for formatted price
-    public function getFormattedPriceAttribute()
+    public function findAll()
     {
-        return '$' . number_format($this->price, 2);
+        return self::all();
     }
 
-    // Mutator for setting the title attribute
-    public function setTitleAttribute($value)
-    {
-        $this->attributes['title'] = ucfirst($value);
+    public function findbyId(){
+        return self::id();
     }
 }
