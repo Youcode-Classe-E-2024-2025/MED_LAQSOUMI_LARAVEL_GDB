@@ -65,6 +65,14 @@ class User extends Authenticatable
     public static function create($data){
         return self::create($data);
     }
-
+    
+    public static function updateUser($id, $data){
+        $user = self::find($id);
+        if($user){
+            $user->update($data);
+            return $user;
+        }
+        return null;
+    }
 
 }
