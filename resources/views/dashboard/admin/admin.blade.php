@@ -19,7 +19,15 @@
                 <a href=""><span class="text-indigo-600">Lib</span>Ement Admin</a>
             </h1>
             <nav>
-                <ul class="flex space-x-6">
+                <div class="block lg:hidden">
+                    <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600 hover:text-blue-600 hover:border-blue-600">
+                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <title>Menu</title>
+                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
+                        </svg>
+                    </button>
+                </div>
+                <ul id="nav-content" class="hidden lg:flex space-x-6">
                     <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
@@ -67,15 +75,15 @@
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-4">Recent Activities</h3>
                 <ul class="space-y-2">
-                    
-                        <li class="text-sm">
-                            <span class="font-medium"></span>
-                            <span></span>
-                            <span class="text-gray-500"></span>
+                    @forelse ($books as $activity)
+                        <li>
+                            <span class="text-gray-600">{{ $activity->description }}</span>
+                            <span class="text-sm text-gray-400">{{ $activity->created_at->diffForHumans() }}</span>
+                            <span class="text-sm text-gray-400">{{ $activity->updated_at->format('Y-m-d') }}</span>
                         </li>
-                    
-                        <li>No recent activities.</li>
-                    
+                    @empty
+                        <li class="text-gray-600">No recent activities.</li>
+                    @endforelse
                 </ul>
             </div>
 
@@ -128,5 +136,16 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('nav-toggle').onclick = function() {
+            var navContent = document.getElementById('nav-content');
+            if (navContent.classList.contains('hidden')) {
+                navContent.classList.remove('hidden');
+            } else {
+                navContent.classList.add('hidden');
+            }
+        };
+    </script>
 </body>
 </html>

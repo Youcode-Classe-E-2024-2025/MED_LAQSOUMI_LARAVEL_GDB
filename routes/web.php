@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\StatisticsController;
 
 // SYSTEM AUTHENTICATION
 Route::get('/', function () {return view('/welcome');})->name('welcome');
