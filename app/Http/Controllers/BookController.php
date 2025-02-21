@@ -25,7 +25,7 @@ class BookController extends Controller
 
     public function create()
     {
-        return view('book.create');
+        return view('dashboard.admin.createBook');
     }
 
     public function store(Request $request)
