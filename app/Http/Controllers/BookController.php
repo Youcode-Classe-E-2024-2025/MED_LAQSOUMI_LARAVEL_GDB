@@ -60,10 +60,10 @@ class BookController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
         if (Book::deleteBook($id)) {
-            return redirect()->route('book.index')->with('success', 'Book deleted successfully!');
+            return redirect()->route('dashboard.user')->with('success', 'Book deleted successfully!');
         } else {
             return redirect()->back()->with('error', 'Book deletion failed!');
         }
