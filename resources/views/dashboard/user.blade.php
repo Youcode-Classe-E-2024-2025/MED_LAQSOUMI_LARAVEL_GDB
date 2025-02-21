@@ -23,16 +23,13 @@
             </h1>
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a href="{{ route('dashboard') }}"
-                            class="text-gray-600 hover:text-blue-600 transition duration-300">Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">My Books</a></li>
-                    <li><a href="{{ route('profile') }}"
-                            class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
+                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-book mr-2"></i>Books</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
+                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit"
-                                class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
+                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -41,10 +38,6 @@
     </header>
 
     <main class="container mx-auto mt-8 px-4 flex-1">
-        @include('layouts.success-message')
-
-        
-
         @include('dashboard.booksSearch')
         @include('dashboard.booksDisplay')
     </main>
