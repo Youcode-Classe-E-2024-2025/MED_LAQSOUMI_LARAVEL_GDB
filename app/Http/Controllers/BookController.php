@@ -38,8 +38,8 @@ class BookController extends Controller
 
     public function edit($id)
     {
-        $book = Book::findById($id);
-        return view('book.edit', ['book' => $book]);
+        $book = Book::find($id); // Corrected method to find the book by ID
+        return view('dashboard.admin.manageBooks', ['book' => $book]);
     }
 
     public function update(Request $request, $id)
@@ -68,11 +68,6 @@ class BookController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        $book = Book::findById($id);
-        return view('dashboard.booksDetaills', ['book' => $book]);
-    }
 
     public function bookSearch($query)
     {
@@ -81,5 +76,23 @@ class BookController extends Controller
             ->orWhere('isbn', 'like', '%' . $query . '%')
             ->get();
         return response()->json($books);
+    }
+
+    public function updateBook(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'cover' => 'required|url',
+            'isbn' => 'required|min:13|max:13',
+        ]);
+
+        if (Book::updateBook($id, $validatedData)) {
+            return redirect()->route('manageBooks')->with('success', 'Book updated successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Book update failed!');
+        }
     }
 }

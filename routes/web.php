@@ -21,7 +21,6 @@ Route::get('/manageBooks', [BookController::class, 'books'])->name('manageBooks'
 Route::get('/booksJson', [BookController::class, 'booksJson'])->name('booksJson');
 Route::get('/book/search/{query}', [BookController::class, 'bookSearch'])->name('book-search');
 Route::post('/books/create', [BookController::class, 'createBook'])->name('create-book');
-Route::get('/books/view/{id}', [BookController::class, 'show'])->name('view-book');
-Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('edit-book');
-Route::post('/books/edit/{id}', [BookController::class, 'editBook']);
+Route::post('/books/update/{id}', [BookController::class, 'updateBook'])->name('update-book');
 Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');
+Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('edit-book'); // Added route for edit method

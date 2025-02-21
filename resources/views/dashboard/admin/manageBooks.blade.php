@@ -49,46 +49,48 @@
         <!-- Enhanced Add New Book Form -->
         <div class="bg-white rounded-xl shadow-sm mb-8 overflow-hidden">
             <div class="border-b px-8 py-4">
-            <h4 class="text-xl font-semibold text-gray-800">Add New Book</h4>
+                <h4 class="text-xl font-semibold text-gray-800">{{ isset($book) ? 'Edit Book' : 'Add New Book' }}</h4>
             </div>
             <div class="p-8">
-            <form action="{{ route('create-book') }}" method="POST" class="max-w-3xl">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
-                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" required>
-                </div>
+                <form action="{{ isset($book) ? route('update-book', $book->id) : route('create-book') }}" method="POST" class="max-w-3xl">
+                    @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" value="{{ $book->title ?? '' }}" required>
+                        </div>
 
-                <div>
-                    <label for="author" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
-                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="author" name="author" required>
-                </div>
+                        <div>
+                            <label for="author" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="author" name="author" value="{{ $book->author ?? '' }}" required>
+                        </div>
 
-                <div class="md:col-span-2">
-                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                    <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="description" name="description" rows="4"></textarea>
-                </div>
+                        <div class="md:col-span-2">
+                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="description" name="description" rows="4">{{ $book->description ?? '' }}</textarea>
+                        </div>
 
-                <div>
-                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
-                    <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" required>
-                    <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">Isbn</label>
-                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-price focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="isbn" name="isbn" minlength="13" maxlength="13" required>
-                </div>
+                        <div>
+                            <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" value="{{ $book->price ?? '' }}" required>
+                        </div>
 
-                <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-                    <input type="url" name="cover" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL">
-                    
-                </div>
+                        <div>
+                            <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">ISBN</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="isbn" name="isbn" minlength="13" maxlength="13" value="{{ $book->isbn ?? '' }}" required>
+                        </div>
 
-                <div class="mt-6 flex space-x-4">
-                <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">Create Book</button>
-                <a href="" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-gray-100 transition-all">Cancel</a>
-                </div>
-            </form>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+                            <input type="url" name="cover" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL" value="{{ $book->cover ?? '' }}">
+                        </div>
+
+                        <div class="mt-6 flex space-x-4">
+                            <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">{{ isset($book) ? 'Update Book' : 'Create Book' }}</button>
+                            <a href="{{ route('manageBooks') }}" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-gray-100 transition-all">Cancel</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -122,14 +124,14 @@
                                 <td class="px-6 py-4 text-sm text-center text-gray-600">${{ number_format($book->price) }}</td>
                                 <td class="px-6 py-4 text-sm text-center text-gray-600">
                                     <div class="flex justify-center space-x-3">
-                                        <a href="" class="px-4 py-2 text-md font-medium text-yellow-600  flex items-center">
+                                        <a href="{{ route('edit-book', ['id' => $book->id]) }}" class="px-4 py-2 text-md font-medium text-yellow-600 flex items-center">
                                             <i class="fas fa-edit mr-2"></i>
                                         </a>
                                         <form action="{{ route('delete-book', ['id' => $book->id]) }}" method="GET" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 
-                                                    class="px-4 py-2 text-md font-medium text-red-600  flex items-center"
+                                                    class="px-4 py-2 text-md font-medium text-red-600 flex items-center"
                                                     onclick="return confirm('Are you sure you want to delete this book?')">
                                                 <i class="fas fa-trash-alt mr-2"></i>
                                             </button>
