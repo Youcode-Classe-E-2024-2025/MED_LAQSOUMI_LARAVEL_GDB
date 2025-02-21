@@ -7,6 +7,10 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
+
+    
+
+
     public function index()
     {
         $books = Book::findAll();

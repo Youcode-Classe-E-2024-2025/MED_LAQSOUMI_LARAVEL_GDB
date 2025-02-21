@@ -41,23 +41,23 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <!-- System Overview -->
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4">System Overview</h3>
-                <ul class="space-y-2">
-                    <li class="flex justify-between">
-                        <span>Total Books:</span>
-                        <span class="font-semibold"></span>
+                <h3 class="text-xl font-semibold mb-4 text-center text-blue-600">System Overview</h3>
+                <ul class="space-y-4">
+                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="text-gray-600">Total Books:</span>
+                        <span class="font-semibold text-blue-600 text-lg">{{ count($books) }}</span>
                     </li>
-                    <li class="flex justify-between">
-                        <span>Total Users:</span>
-                        <span class="font-semibold"></span>
+                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="text-gray-600">Total Users:</span>
+                        <span class="font-semibold text-green-600 text-lg">{{ count($user) }}</span>
                     </li>
-                    <li class="flex justify-between">
-                        <span>Books Borrowed:</span>
-                        <span class="font-semibold"></span>
+                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="text-gray-600">Books Borrowed:</span>
+                        <span class="font-semibold text-purple-600 text-lg"></span>
                     </li>
-                    <li class="flex justify-between">
-                        <span>Overdue Books:</span>
-                        <span class="font-semibold text-red-600"></span>
+                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="text-gray-600">Overdue Books:</span>
+                        <span class="font-semibold text-red-600 text-lg"></span>
                     </li>
                 </ul>
             </div>
