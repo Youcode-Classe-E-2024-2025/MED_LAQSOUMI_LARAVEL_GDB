@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Libement System</title>
+    <title>User Dashboard - Libement System</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .transition-all {
-            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -111,24 +109,24 @@
                             @foreach($books ?? [] as $book)
                             <tr class="hover:bg-gray-50 transition-all">
                                 <td class="px-6 py-4">
-                                    <img src="{{ $book->cover ?? 'default-cover.jpg' }}" alt="Cover" 
+                                    <img src="{{ $book->cover}}" alt="{{ $book->title }}" 
                                          class="h-20 w-16 object-cover rounded-lg shadow-sm">
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-800 font-medium">{{ $book->title ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ $book->author ?? 'N/A' }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">${{ number_format($book->price ?? 0, 2) }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800 font-medium">{{ $book->title }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">{{ $book->author }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-600">${{ number_format($book->price) }}</td>
                                 <td class="px-6 py-4">
                                     <div class="flex space-x-3">
-                                        <a href="" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all">
-                                           Edit
+                                        <a href="" class="px-4 py-2 text-md font-medium text-yellow-600  flex items-center">
+                                            <i class="fas fa-edit mr-2"></i>
                                         </a>
                                         <form action="" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 
-                                                    class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-all"
+                                                    class="px-4 py-2 text-md font-medium text-red-600  flex items-center"
                                                     onclick="return confirm('Are you sure you want to delete this book?')">
-                                                Delete
+                                                <i class="fas fa-trash-alt mr-2"></i>
                                             </button>
                                         </form>
                                     </div>
