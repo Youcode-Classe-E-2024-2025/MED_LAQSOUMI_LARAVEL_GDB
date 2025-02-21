@@ -7,22 +7,17 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-
-    
-    public function books(Request $request)
-{
-    $query = $request->input('query');
-    if ($query) {
-        $books = Book::where('title', 'like', '%' . $query . '%')
-            ->orWhere('author', 'like', '%' . $query . '%')
-            ->orWhere('isbn', 'like', '%' . $query . '%')
-            ->get();
-    } else {
+    public function booksJson(Request $request)
+    {
         $books = Book::all();
+        return response()->json($books);
     }
 
-    return view('dashboard.booksDisplay', ['books' => $books]);
-}
+    public function books()
+    {
+        $books = Book::all();
+        return view('dashboard.admin.manageBooks', ['books' => $books]);
+    }
 
     public function create()
     {
@@ -84,5 +79,14 @@ class BookController extends Controller
     {
         $book = Book::findById($id);
         return view('dashboard.booksDetaills', ['book' => $book]);
+    }
+
+    public function bookSearch($query)
+    {
+        $books = Book::where('title', 'like', '%' . $query . '%')
+            ->orWhere('author', 'like', '%' . $query . '%')
+            ->orWhere('isbn', 'like', '%' . $query . '%')
+            ->get();
+        return response()->json($books);
     }
 }
