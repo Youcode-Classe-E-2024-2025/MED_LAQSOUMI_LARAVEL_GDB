@@ -1,49 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Libement System</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
-    <header class="bg-white shadow-md">
-        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-blue-600">
-                <a href="" class="hover:opacity-80 transition-opacity"><span class="text-indigo-600">Lib</span>Ement Admin</a>
-            </h1>
-            <nav>
-                <div class="block lg:hidden">
-                    <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600 hover:text-blue-600 hover:border-blue-600">
-                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <title>Menu</title>
-                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-                        </svg>
-                    </button>
-                </div>
-                <ul id="nav-content" class="hidden lg:flex space-x-6">
-                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Reports</a></li>
-                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
-                    <li>
-                        <form action="/logout" method="POST">
-                            @csrf
-                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <div class="container mx-auto px-4 py-8">
+
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="border-b pb-4 mb-6">
                 <h4 class="text-2xl font-semibold text-gray-800">Add New Book</h4>
@@ -83,6 +38,4 @@
                 </form>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    
