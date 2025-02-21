@@ -15,7 +15,7 @@
                                             <span class="font-medium mr-2">ISBN:</span> {{ $book->isbn }}
                                         </p>
                                         <p class="text-sm text-gray-500 flex items-center">
-                                            <span class="font-medium mr-2">Published:</span> {{ $book->published }}
+                                            <span class="font-medium mr-2">Published:</span> {{ $book->created_at->format('m-d-Y') }}
                                         </p>
                                     </div>
                                 </div>

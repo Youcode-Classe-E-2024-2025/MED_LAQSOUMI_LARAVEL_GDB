@@ -50,7 +50,7 @@
             <h4 class="text-xl font-semibold text-gray-800">Add New Book</h4>
             </div>
             <div class="p-8">
-            <form action="" method="POST" enctype="multipart/form-data" class="max-w-3xl">
+            <form action="{{ route('create-book') }}" method="POST" enctype="multipart/form-data" class="max-w-3xl">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>

@@ -23,15 +23,17 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'author' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'cover' => 'required',
-            'isbn' => 'required',
+            'title' => 'required|unique:books|max:50|min:3',
+            'author' => 'required|max:50|min:5',
+            'description' => 'required|max:255|min:10',
+            'price' => 'required|numeric',
+            'cover' => 'required|string',
+            'isbn' => 'required|unique:books|max:13|min:13',
+            'category' => 'required',
+            'status' => 'required',
         ]);
         if (Book::createBook($data)) {
-            return redirect()->route('book.index')->with('success', 'Book created successfully!');
+            return redirect()->route('dashboard.admin.manageBooks')->with('success', 'Book created successfully!');
         } else {
             return redirect()->back()->with('error', 'Book creation failed!');
         }
