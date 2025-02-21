@@ -68,4 +68,10 @@ class BookController extends Controller
             return redirect()->back()->with('error', 'Book deletion failed!');
         }
     }
+
+    public function show($id)
+    {
+        $book = Book::findById($id);
+        return view('dashboard.booksDetaills', ['book' => $book]);
+    }
 }
