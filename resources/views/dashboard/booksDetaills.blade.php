@@ -87,7 +87,10 @@
                                 <i class="fas fa-barcode mr-2"></i>ISBN
                             </div>
                             <div class="text-gray-800">{{ $book->isbn }}</div>
-                            
+                            <div class="text-gray-600 font-semibold">
+                                <i class="fas fa-money-bill mr-2"></i>Price
+                            </div>
+                            <div class="text-gray-800">{{ number_format($book->price, 0) }} $</div>
                             <div class="text-gray-600 font-semibold">
                                 <i class="fas fa-tag mr-2"></i>Category
                             </div>
@@ -105,14 +108,15 @@
                             <p class="text-gray-600 leading-relaxed">{{ $book->description }}</p>
                         </div>
 
+
                         <div class="mt-8 flex space-x-4">
                             <a href="" 
                                class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
-                               <i class="fas fa-bookmark mr-2"></i> Reserve
+                               <i class="fas fa-bookmark mr-2"></i> borrowings
                             </a>
                             <a href="{{ route('dashboard') }}" 
                                class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 flex items-center">
-                               <i class="fas fa-arrow-left mr-2"></i> Back to List
+                               <i class="fas fa-arrow-left mr-2"></i> Back to Books
                             </a>
                         </div>
                     </div>

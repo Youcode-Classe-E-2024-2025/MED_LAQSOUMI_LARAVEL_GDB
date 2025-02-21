@@ -24,7 +24,6 @@ Route::post('/books/create', [BookController::class, 'createBook']);
 Route::get('/books/view/{id}', [BookController::class, 'show'])->name('view-book');
 Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('edit-book');
 Route::post('/books/edit/{id}', [BookController::class, 'editBook']);
-Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');
 Route::post('/books/delete/{id}', [BookController::class, 'deleteBook']);
 
 // STATISTICS
