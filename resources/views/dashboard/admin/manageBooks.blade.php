@@ -44,15 +44,18 @@
     </header>
 
     <div class="container mx-auto px-6 py-8">
+        @include('layouts.success-message')
+        @include('layouts.error-message')
         <!-- Enhanced Add New Book Form -->
         <div class="bg-white rounded-xl shadow-sm mb-8 overflow-hidden">
             <div class="border-b px-8 py-4">
             <h4 class="text-xl font-semibold text-gray-800">Add New Book</h4>
             </div>
             <div class="p-8">
-            <form action="{{ route('create-book') }}" method="POST" enctype="multipart/form-data" class="max-w-3xl">
+            <form action="{{ route('store-book') }}" method="POST" class="max-w-3xl">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
                 <div>
                     <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
                     <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" required>
@@ -71,27 +74,14 @@
                 <div>
                     <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
                     <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" required>
+                    <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">Isbn</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-price focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="isbn" name="isbn" minlength="13" maxlength="13" required>
                 </div>
 
                 <div class="md:col-span-2">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-                    <div class="space-y-4">
-                    <div>
-                        <label class="inline-flex items-center">
-                        <input type="radio" name="cover_type" value="url" class="form-radio" checked>
-                        <span class="ml-2">Image URL</span>
-                        </label>
-                        <input type="url" name="cover_url" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL">
-                    </div>
-                    <div>
-                        <label class="inline-flex items-center">
-                        <input type="radio" name="cover_type" value="file" class="form-radio">
-                        <span class="ml-2">Upload Image</span>
-                        </label>
-                        <input type="file" name="cover_image" accept="image/*" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
-                    </div>
-                    </div>
-                </div>
+                    <input type="url" name="cover_url" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL">
+                    
                 </div>
 
                 <div class="mt-6 flex space-x-4">
@@ -135,7 +125,7 @@
                                         <a href="" class="px-4 py-2 text-md font-medium text-yellow-600  flex items-center">
                                             <i class="fas fa-edit mr-2"></i>
                                         </a>
-                                        <form action="" method="POST" class="inline">
+                                        <form action="{{ route('delete-book', ['id' => $book->id]) }}" method="GET" class="inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" 

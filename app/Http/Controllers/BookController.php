@@ -19,29 +19,8 @@ class BookController extends Controller
         return view('dashboard.admin.manageBooks', ['books' => $books]);
     }
 
-    public function create()
-    {
-        return view('dashboard.admin.createBooks');
-    }
+    public function create(){}
 
-    public function store(Request $request)
-    {
-        $data = $request->validate([
-            'title' => 'required|unique:books|max:50|min:3',
-            'author' => 'required|max:50|min:5',
-            'description' => 'required|max:255|min:10',
-            'price' => 'required|numeric',
-            'cover' => 'required|string',
-            'isbn' => 'required|unique:books|max:13|min:13',
-            'category' => 'required',
-            'status' => 'required',
-        ]);
-        if (Book::createBook($data)) {
-            return redirect()->route('dashboard.admin.manageBooks')->with('success', 'Book created successfully!');
-        } else {
-            return redirect()->back()->with('error', 'Book creation failed!');
-        }
-    }
 
     public function edit($id)
     {
@@ -66,10 +45,10 @@ class BookController extends Controller
         }
     }
 
-    public function delete($id)
+    public function deleteBook($id)
     {
         if (Book::deleteBook($id)) {
-            return redirect()->route('dashboard.user')->with('success', 'Book deleted successfully!');
+            return redirect()->route('manageBooks')->with('success', 'Book deleted successfully!');
         } else {
             return redirect()->back()->with('error', 'Book deletion failed!');
         }

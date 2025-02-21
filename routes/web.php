@@ -20,9 +20,8 @@ Route::post('/profile/edit', [AuthController::class, 'editProfile'])->name('edit
 Route::get('/manageBooks', [BookController::class, 'books'])->name('manageBooks');
 Route::get('/booksJson', [BookController::class, 'booksJson'])->name('booksJson');
 Route::get('/book/search/{query}', [BookController::class, 'bookSearch'])->name('book-search');
-Route::get('/books/create', [BookController::class, 'create'])->name('create-book');
-Route::post('/books/store', [BookController::class, 'store'])->name('create-book');
+Route::post('/books/store', [BookController::class, 'store'])->name('store-book');
 Route::get('/books/view/{id}', [BookController::class, 'show'])->name('view-book');
 Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('edit-book');
 Route::post('/books/edit/{id}', [BookController::class, 'editBook']);
-Route::post('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');
+Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');

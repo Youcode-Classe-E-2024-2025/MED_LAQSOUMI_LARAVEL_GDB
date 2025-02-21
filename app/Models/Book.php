@@ -30,11 +30,6 @@ class Book extends Model
         return self::find($id);
     }
 
-    public static function createBook($data)
-    {
-        return self::create($data);
-    }
-
     public static function updateBook($id, $data)
     {
         $book = self::find($id);
@@ -55,4 +50,8 @@ class Book extends Model
         return false;
     }
 
+    public static function createBook($data)
+    {
+        return self::create($data);
+    }
 }

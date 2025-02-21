@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->string('cover');
             $table->string('isbn');
-            $table->timestamps(); // Add this line to include created_at and updated_at columns
+            $table->timestamps();
         });
     }
 

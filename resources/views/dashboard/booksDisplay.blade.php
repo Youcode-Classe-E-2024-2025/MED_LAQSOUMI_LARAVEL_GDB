@@ -1,13 +1,13 @@
-<!-- filepath: /home/medlaq777/Desktop/laravel_GDB/resources/views/dashboard/booksDisplay.blade.php -->
+
 <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
     <h3 class="text-xl font-semibold mb-4">Search for Books</h3>
     <input type="text" id="query" name="query" placeholder="Enter book title, author, or ISBN" class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
     
-    <!-- Add a container for search results -->
+    
     <div id="searchResults" class="mt-4"></div>
 </div>
 
-<!-- Search Results -->
+
 <div id="booksContainer" class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     
 </div>
@@ -22,10 +22,10 @@
     document.querySelector('#query').addEventListener('input', function(e) {
         let query = e.target.value;
         let booksContainer = document.querySelector('#booksContainer');
-        booksContainer.innerHTML = ''; // Clear previous results
+        booksContainer.innerHTML = ''; 
 
         if (query.length > 0) {
-            // Fetch search results when query is not empty
+            
             fetch(`/book/search/${query}`)
                 .then(response => response.json())
                 .then(data => {
@@ -63,7 +63,7 @@
                     booksContainer.innerHTML = '<p class="text-red-600">An error occurred while fetching the books.</p>';
                 });
         } else {
-            // If the input is empty, fetch all books again
+            
             fetch(`{{ route('booksJson') }}`)
                 .then(response => response.json())
                 .then(data => {
@@ -99,7 +99,7 @@
         }
     });
 
-    // Fetch all books on page load
+    
     document.addEventListener('DOMContentLoaded', function() {
         fetch(`{{ route('booksJson') }}`)
             .then(response => response.json())
