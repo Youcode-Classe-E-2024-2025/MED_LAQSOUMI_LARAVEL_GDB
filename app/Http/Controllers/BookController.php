@@ -9,11 +9,20 @@ class BookController extends Controller
 {
 
     
-    public function books()
-    {
+    public function books(Request $request)
+{
+    $query = $request->input('query');
+    if ($query) {
+        $books = Book::where('title', 'like', '%' . $query . '%')
+            ->orWhere('author', 'like', '%' . $query . '%')
+            ->orWhere('isbn', 'like', '%' . $query . '%')
+            ->get();
+    } else {
         $books = Book::all();
-        return view('dashboard.admin.manageBooks', ['books' => $books]);
     }
+
+    return view('dashboard.booksDisplay', ['books' => $books]);
+}
 
     public function create()
     {

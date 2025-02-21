@@ -55,10 +55,4 @@ class Book extends Model
         return false;
     }
 
-
-    public function findByIdJson($id)
-    {
-        return self::findById($id)->toJson();
-    }
-
 }
