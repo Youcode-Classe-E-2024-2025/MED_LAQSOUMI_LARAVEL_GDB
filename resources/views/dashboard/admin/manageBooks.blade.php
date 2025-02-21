@@ -27,15 +27,15 @@
             </h1>
             <nav>
                 <ul class="hidden lg:flex items-center space-x-8">
-                    <li><a href="/dashboard" class="text-gray-600 hover:text-indigo-600 font-medium transition-all">Dashboard</a></li>
-                    <li><a href="/manageBooks" class="text-gray-600 hover:text-indigo-600 font-medium transition-all">Manage Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-indigo-600 font-medium transition-all">Manage Users</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-indigo-600 font-medium transition-all">Reports</a></li>
-                    <li><a href="/profile" class="text-gray-600 hover:text-indigo-600 font-medium transition-all">Profile</a></li>
+                    <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
+                    <li><a href="{{ route('manageBooks') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-books mr-2"></i>Manage Books</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-file-alt mr-2"></i>Reports</a></li>
+                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
-                        <form action="/logout" method="POST">
+                        <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all">Logout</button>
+                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
                         </form>
                     </li>
                 </ul>
@@ -47,43 +47,58 @@
         <!-- Enhanced Add New Book Form -->
         <div class="bg-white rounded-xl shadow-sm mb-8 overflow-hidden">
             <div class="border-b px-8 py-4">
-                <h4 class="text-xl font-semibold text-gray-800">Add New Book</h4>
+            <h4 class="text-xl font-semibold text-gray-800">Add New Book</h4>
             </div>
             <div class="p-8">
-                <form action="" method="POST" enctype="multipart/form-data" class="max-w-3xl">
-                    @csrf
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" required>
-                        </div>
+            <form action="" method="POST" enctype="multipart/form-data" class="max-w-3xl">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" required>
+                </div>
 
-                        <div>
-                            <label for="author" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
-                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="author" name="author" required>
-                        </div>
+                <div>
+                    <label for="author" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
+                    <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="author" name="author" required>
+                </div>
 
-                        <div class="md:col-span-2">
-                            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="description" name="description" rows="4"></textarea>
-                        </div>
+                <div class="md:col-span-2">
+                    <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="description" name="description" rows="4"></textarea>
+                </div>
 
-                        <div>
-                            <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
-                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" required>
-                        </div>
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
+                    <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" required>
+                </div>
 
-                        <div>
-                            <label for="cover_image" class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-                            <input type="file" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="cover_image" name="cover_image">
-                        </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
+                    <div class="space-y-4">
+                    <div>
+                        <label class="inline-flex items-center">
+                        <input type="radio" name="cover_type" value="url" class="form-radio" checked>
+                        <span class="ml-2">Image URL</span>
+                        </label>
+                        <input type="url" name="cover_url" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL">
                     </div>
-
-                    <div class="mt-6 flex space-x-4">
-                        <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">Create Book</button>
-                        <a href="" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-gray-100 transition-all">Cancel</a>
+                    <div>
+                        <label class="inline-flex items-center">
+                        <input type="radio" name="cover_type" value="file" class="form-radio">
+                        <span class="ml-2">Upload Image</span>
+                        </label>
+                        <input type="file" name="cover_image" accept="image/*" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
                     </div>
-                </form>
+                    </div>
+                </div>
+                </div>
+
+                <div class="mt-6 flex space-x-4">
+                <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">Create Book</button>
+                <a href="" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-gray-100 transition-all">Cancel</a>
+                </div>
+            </form>
             </div>
         </div>
 
@@ -98,25 +113,25 @@
                     <table class="w-full">
                         <thead>
                             <tr class="bg-gray-50">
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Cover</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Title</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Author</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Price</th>
-                                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-600">Actions</th>
+                                <th class="px-6 py-4 text-center text-md font-semibold text-gray-600">Cover</th>
+                                <th class="px-6 py-4 text-center text-md font-semibold text-gray-600">Title</th>
+                                <th class="px-6 py-4 text-center text-md font-semibold text-gray-600">Author</th>
+                                <th class="px-6 py-4 text-center text-md font-semibold text-gray-600">Price</th>
+                                <th class="px-6 py-4 text-center text-md font-semibold text-gray-600">Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-100">
+                        <tbody class="divide-y divide-gray-100 i">
                             @foreach($books ?? [] as $book)
                             <tr class="hover:bg-gray-50 transition-all">
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 flex justify-center">
                                     <img src="{{ $book->cover}}" alt="{{ $book->title }}" 
-                                         class="h-20 w-16 object-cover rounded-lg shadow-sm">
+                                         class="h-20 w-16 object-cover rounded-lg shadow-sm bg-center bg-contain">
                                 </td>
-                                <td class="px-6 py-4 text-sm text-gray-800 font-medium">{{ $book->title }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">{{ $book->author }}</td>
-                                <td class="px-6 py-4 text-sm text-gray-600">${{ number_format($book->price) }}</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex space-x-3">
+                                <td class="px-6 py-4 text-sm text-center text-gray-800 font-medium">{{ $book->title }}</td>
+                                <td class="px-6 py-4 text-sm text-center text-gray-600">{{ $book->author }}</td>
+                                <td class="px-6 py-4 text-sm text-center text-gray-600">${{ number_format($book->price) }}</td>
+                                <td class="px-6 py-4 text-sm text-center text-gray-600">
+                                    <div class="flex justify-center space-x-3">
                                         <a href="" class="px-4 py-2 text-md font-medium text-yellow-600  flex items-center">
                                             <i class="fas fa-edit mr-2"></i>
                                         </a>
