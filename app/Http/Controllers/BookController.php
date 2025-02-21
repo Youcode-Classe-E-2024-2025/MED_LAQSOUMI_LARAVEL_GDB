@@ -26,8 +26,8 @@ class BookController extends Controller
             'author' => 'required',
             'description' => 'required',
             'price' => 'required',
-            'cover' => 'required',
-            'isbn' => 'required',
+            'cover' => 'required|url',
+            'isbn' => 'required|min:13|max:13',
         ]);
         if (Book::create($validatedData)) {
             return redirect()->route('manageBooks')->with('success', 'Book created successfully!');

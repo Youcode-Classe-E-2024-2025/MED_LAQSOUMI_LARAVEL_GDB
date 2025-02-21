@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->text('description');
-            $table->integer('price');
+            $table->decimal('price', 8, 0);
             $table->string('cover');
             $table->string('isbn');
             $table->timestamps();
+            
         });
     }
 
