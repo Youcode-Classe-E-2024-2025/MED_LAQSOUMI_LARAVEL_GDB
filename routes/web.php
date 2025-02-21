@@ -18,7 +18,7 @@ Route::post('/profile/edit', [AuthController::class, 'editProfile'])->name('edit
 
 
 // BOOKS
-Route::get('/books', [BookController::class, 'books'])->name('books');
+Route::get('/manageBooks', [BookController::class, 'books'])->name('books');
 Route::get('/books/create', [BookController::class, 'create'])->name('create-book');
 Route::post('/books/create', [BookController::class, 'createBook']);
 Route::get('/books/edit/{id}', [BookController::class, 'editBook'])->name('edit-book');

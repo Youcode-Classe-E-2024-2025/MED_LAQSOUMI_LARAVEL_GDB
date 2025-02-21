@@ -9,23 +9,15 @@ class BookController extends Controller
 {
 
     
-
-
-    public function index()
+    public function books()
     {
-        $books = Book::findAll();
-        return view('book.index', ['books' => $books]);
-    }
-
-    public function show($id)
-    {
-        $book = Book::findById($id);
-        return view('book.show', ['book' => $book]);
+        $books = Book::all();
+        return view('dashboard.admin.manageBooks', ['books' => $books]);
     }
 
     public function create()
     {
-        return view('dashboard.admin.createBook');
+        return view('dashboard.admin.createBooks');
     }
 
     public function store(Request $request)

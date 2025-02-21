@@ -43,7 +43,6 @@
             </nav>
         </div>
     </header>
-
     <div class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="border-b pb-4 mb-6">
