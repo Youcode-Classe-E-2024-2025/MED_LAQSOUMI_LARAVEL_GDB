@@ -92,7 +92,6 @@
                 <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
                 <div class="space-y-2">
                     <a href="" class="block w-full text-center py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Add New Book</a>
-                    <a href="" class="block w-full text-center py-2 px-4 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300">Add New User</a>
                     <a href="" class="block w-full text-center py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300">Generate Report</a>
                 </div>
             </div>
