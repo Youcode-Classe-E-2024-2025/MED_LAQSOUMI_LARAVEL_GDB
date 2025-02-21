@@ -102,18 +102,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @forelse ($books as $book)
                         <tr>
-                            <td class="py-2"></td>
-                            <td class="py-2"></td>
-                            <td class="py-2"></td>
-                            <td class="py-2"></td>
+                            <td class="py-2">{{ $book->title }}</td>
+                            <td class="py-2">{{ $book->author }}</td>
+                            <td class="py-2">{{ $book->isbn }}</td>
+                            <td class="py-2">{{ $book->created_at->format('Y-m-d') }}</td>
                         </tr>
-                    
+                    @empty
                         <tr>
                             <td colspan="4" class="py-2 text-center">No books added recently.</td>
                         </tr>
-                    
+                    @endforelse
                 </tbody>
             </table>
         </div>
