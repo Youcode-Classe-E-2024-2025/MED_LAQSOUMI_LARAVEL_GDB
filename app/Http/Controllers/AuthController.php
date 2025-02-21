@@ -91,7 +91,7 @@ class AuthController extends Controller
     public function profile ()
     {
         if (session()->has('email')) {
-            return view('auth.profile', ['email' => session()->get('email'), 'name' => User::where('email', session()->get('email'))->first()->name, 'role' => session()->get('role')]);
+            return view('auth.profile', ['email' => session()->get('email'), 'name' => User::where('email', session()->get('email'))->first()->name, 'role' => session()->get('role'), 'created_at' => session()->get('created_at')]);
         } else {
             return redirect()->route('login')->with('error', 'Please login to access');
         }

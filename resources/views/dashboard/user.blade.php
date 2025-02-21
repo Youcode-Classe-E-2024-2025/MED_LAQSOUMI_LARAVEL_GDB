@@ -43,16 +43,7 @@
     <main class="container mx-auto mt-8 px-4 flex-1">
         @include('layouts.success-message')
 
-        <!-- Display User Information -->
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-semibold mb-4">Welcome, {{ $name }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <p class="text-gray-600">Email: {{ $email }}</p>
-                    <p class="text-gray-600">Member since: {{ $created_at->format(' d/m/Y ') }}</p>
-                </div>
-            </div>
-        </div>
+        
 
         @include('dashboard.booksSearch')
         @include('dashboard.booksDisplay')
