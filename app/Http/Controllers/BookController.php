@@ -68,6 +68,12 @@ class BookController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $book = Book::findById($id);
+        return view('dashboard.booksDetaills', ['book' => $book]);
+    }
+
 
     public function bookSearch($query)
     {

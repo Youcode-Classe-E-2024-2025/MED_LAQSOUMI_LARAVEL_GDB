@@ -33,7 +33,6 @@
                     <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
                     <li><a href="/manageBooks" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
                     <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Reports</a></li>
                     <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
                     <li>
                         <form action="/logout" method="POST">
@@ -62,14 +61,6 @@
                         <span class="text-gray-600">Total Users:</span>
                         <span class="font-semibold text-green-600 text-lg">{{ count($users) }}</span>
                     </li>
-                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
-                        <span class="text-gray-600">Books Borrowed:</span>
-                        <span class="font-semibold text-purple-600 text-lg"></span>
-                    </li>
-                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
-                        <span class="text-gray-600">Overdue Books:</span>
-                        <span class="font-semibold text-red-600 text-lg"></span>
-                    </li>
                 </ul>
             </div>
 
@@ -87,15 +78,6 @@
                         <li class="text-gray-600">No recent activities.</li>
                     @endforelse
                 </ul>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-xl font-semibold mb-4">Quick Actions</h3>
-                <div class="space-y-2">
-                    <a href="{{ route('manageBooks') }}" class="block w-full text-center py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">Add New Book</a>
-                    <a href="" class="block w-full text-center py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-300">Generate Report</a>
-                </div>
             </div>
         </div>
 

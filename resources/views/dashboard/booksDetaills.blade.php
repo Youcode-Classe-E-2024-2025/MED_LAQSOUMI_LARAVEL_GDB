@@ -110,13 +110,21 @@
 
 
                         <div class="mt-8 flex space-x-4">
-                            <a href="" 
-                               class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
-                               <i class="fas fa-bookmark mr-2"></i> borrowings
+                            @auth
+                            <form action="{{ route('borrowings.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
+                                    <i class="fas fa-bookmark mr-2"></i> Borrow
+                                </button>
+                            </form>
+                            @else
+                            <a href="{{ route('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
+                                <i class="fas fa-bookmark mr-2"></i> Borrow
                             </a>
-                            <a href="{{ route('dashboard') }}" 
-                               class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 flex items-center">
-                               <i class="fas fa-arrow-left mr-2"></i> Back to Books
+                            @endauth
+                            <a href="{{ route('dashboard') }}" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 flex items-center">
+                                <i class="fas fa-arrow-left mr-2"></i> Back to Books
                             </a>
                         </div>
                     </div>
