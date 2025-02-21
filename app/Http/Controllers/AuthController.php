@@ -71,6 +71,7 @@ class AuthController extends Controller
                 'email' => session()->get('email'),
                 'role' => $sessionRole,
                 'name' => User::where('email', session()->get('email'))->first()->name,
+                'users' => User::all(), // Fetch all users
                 'books' => $books // Pass books to the view
             ]);
         } else {

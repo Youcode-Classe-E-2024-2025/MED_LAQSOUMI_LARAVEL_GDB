@@ -49,7 +49,7 @@
                     </li>
                     <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
                         <span class="text-gray-600">Total Users:</span>
-                        <span class="font-semibold text-green-600 text-lg">{{ count($user) }}</span>
+                        <span class="font-semibold text-green-600 text-lg">{{ count($users) }}</span>
                     </li>
                     <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
                         <span class="text-gray-600">Books Borrowed:</span>
