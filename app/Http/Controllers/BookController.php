@@ -76,9 +76,4 @@ class BookController extends Controller
             return redirect()->back()->with('error', 'Book deletion failed!');
         }
     }
-
-    public function recentlyAddBooks(){
-        $books = Book::orderBy('created_at', 'desc')->limit(5)->get();
-        return view('book.recently-added', ['recentlyAddBooks' => $books]);
-    }
 }
