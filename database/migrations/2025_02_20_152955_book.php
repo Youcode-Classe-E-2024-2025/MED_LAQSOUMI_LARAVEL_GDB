@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
             $table->string('cover');
             $table->string('isbn');
             $table->timestamps();

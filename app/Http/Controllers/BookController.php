@@ -19,8 +19,22 @@ class BookController extends Controller
         return view('dashboard.admin.manageBooks', ['books' => $books]);
     }
 
-    public function create(){}
-
+    public function createBook(Request $request) // Renamed from create to createBook
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'cover' => 'required',
+            'isbn' => 'required',
+        ]);
+        if (Book::create($validatedData)) {
+            return redirect()->route('manageBooks')->with('success', 'Book created successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Book creation failed!');
+        }
+    }
 
     public function edit($id)
     {
