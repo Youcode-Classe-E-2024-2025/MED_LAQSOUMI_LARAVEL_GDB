@@ -15,9 +15,11 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         if ($request->isMethod('POST')) {
-            $validatedData = $request->validate([]);
-            $validatedData['name'] = $request->input('name');
-            $validatedData['email'] = $request->input('email');
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
             $validatedData['password'] = Hash::make($request->input('password'));
             $validatedData['remember_token'] = Hash::make($request->input('email'));
             $validatedData['role'] = 'user';
@@ -92,11 +94,12 @@ class AuthController extends Controller
 
     public function profile ()
     {
-        if (session()->has('email')) {
-            return view('auth.profile', ['email' => session()->get('email'), 'name' => User::where('email', session()->get('email'))->first()->name, 'role' => session()->get('role'), 'created_at' => session()->get('created_at')]);
-        } else {
-            return redirect()->route('login')->with('error', 'Please login to access');
-        }
+        return view('auth.profile', [
+            'email' => session()->get('email'),
+            'role' => session()->get('role'),
+            'name' => User::where('email', session()->get('email'))->first()->name,
+            'created_at' => User::where('email', session()->get('email'))->first()->created_at
+        ]);
     }
 
     public function editProfile(Request $request)

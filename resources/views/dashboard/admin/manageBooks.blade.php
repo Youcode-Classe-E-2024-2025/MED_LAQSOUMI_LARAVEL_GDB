@@ -41,9 +41,8 @@
                 <ul class="hidden lg:flex items-center space-x-8">
                     <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
                     <li><a href="{{ route('manageBooks') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-book mr-2"></i>Manage Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-file-alt mr-2"></i>Reports</a></li>
-                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
+                    <li><a href="{{ route('manageUsers') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
+                    <li><a href="{{ route('profile') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

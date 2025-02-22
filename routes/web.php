@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BorrowedController;
 
 // AUTHENTICATION
@@ -15,6 +16,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 Route::post('/profile/edit', [AuthController::class, 'editProfile'])->name('editProfile');
+
+// USERS
+Route::get('/manageUsers', [UserController::class, 'users'])->name('manageUsers');
+Route::post('/users/create', [UserController::class, 'createUser'])->name('create-user');
+Route::match(['post', 'put'], '/users/update/{id}', [UserController::class, 'updateUser'])->name('update-user');
+Route::get('/users/delete/{id}', [UserController::class, 'deleteUser'])->name('delete-user');
 
 // BOOKS
 Route::get('/manageBooks', [BookController::class, 'books'])->name('manageBooks');
