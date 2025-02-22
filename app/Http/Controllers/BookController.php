@@ -13,10 +13,11 @@ class BookController extends Controller
         return response()->json($books);
     }
 
-    public function books()
+    public function books($id=null)
     {
         $books = Book::all();
-        return view('dashboard.admin.manageBooks', ['books' => $books]);
+        $book = Book::find($id);
+        return view('dashboard.admin.manageBooks', ['books' => $books, 'book'=>$book]);
     }
 
     public function createBook(Request $request) // Renamed from create to createBook
@@ -95,7 +96,8 @@ class BookController extends Controller
             'isbn' => 'required|min:13|max:13',
         ]);
 
-        if (Book::updateBook($id, $validatedData)) {
+        $book = Book::find($id);
+        if ($book->update($validatedData)) {
             return redirect()->route('manageBooks')->with('success', 'Book updated successfully!');
         } else {
             return redirect()->back()->with('error', 'Book update failed!');

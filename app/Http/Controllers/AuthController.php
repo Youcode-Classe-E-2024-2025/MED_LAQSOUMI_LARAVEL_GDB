@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Book;
+use App\Models\Borrow;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -72,7 +73,8 @@ class AuthController extends Controller
                 'role' => $sessionRole,
                 'name' => User::where('email', session()->get('email'))->first()->name,
                 'users' => User::all(), // Fetch all users
-                'books' => $books // Pass books to the view
+                'books' => $books, // Pass books to the view
+                'borrows' => Borrow::getAllBorrowings() // Fetch all borrows
             ]);
         } else {
             return view('dashboard.user', [

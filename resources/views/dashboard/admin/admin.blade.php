@@ -18,28 +18,33 @@
     <header class="bg-white shadow-md">
         <div class="container mx-auto px-4 py-6 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-blue-600">
-                <a href=""><span class="text-indigo-600">Lib</span>Ement Admin</a>
+                <a href=""><i class="fas fa-book-open mr-2"></i><span class="text-indigo-600">Lib</span>Ement</a>
             </h1>
             <nav>
-                <div class="block lg:hidden">
-                    <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600 hover:text-blue-600 hover:border-blue-600">
-                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <title>Menu</title>
-                            <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-                        </svg>
-                    </button>
-                </div>
-                <ul id="nav-content" class="hidden lg:flex space-x-6">
-                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300">Dashboard</a></li>
-                    <li><a href="/manageBooks" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300">Manage Users</a></li>
-                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300">Profile</a></li>
+                <ul class="flex space-x-6">
+                    @if($role === 'user')
+                    <li><a href="/dashboard" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-book mr-2"></i>Books</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
+                    <li><a href="/profile" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
-                        <form action="/logout" method="POST">
+                        <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300">Logout</button>
+                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
                         </form>
                     </li>
+                    @elseif($role === 'admin')
+                    <li><a href="{{route('dashboard')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
+                    <li><a href="{{route('manageBooks')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-books mr-2"></i>Manage Books</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
+                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-file-alt mr-2"></i>Reports</a></li>
+                    <li><a href="{{route('profile')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
+                    <li>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+                        </form>
+                    </li>
+                    @endif
                 </ul>
             </nav>
         </div>
@@ -60,6 +65,10 @@
                     <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
                         <span class="text-gray-600">Total Users:</span>
                         <span class="font-semibold text-green-600 text-lg">{{ count($users) }}</span>
+                    </li>
+                    <li class="flex justify-between items-center p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                        <span class="text-gray-600">Total Borrowed Books:</span>
+                        <span class="font-semibold text-red-600 text-lg">{{ count($borrows) }}</span>
                     </li>
                 </ul>
             </div>
