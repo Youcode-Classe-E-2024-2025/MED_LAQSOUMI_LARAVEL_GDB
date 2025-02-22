@@ -15,7 +15,19 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen" x-data="{ showModal: false }">
+<body class="bg-gray-50 flex flex-col min-h-screen" x-data="{ 
+    showModal: false,
+    editMode: false,
+    bookData: {
+        id: '',
+        title: '',
+        author: '',
+        description: '',
+        price: '',
+        isbn: '',
+        cover: ''
+    }
+}">
     <!-- Enhanced Header -->
     <header class="bg-white shadow-lg sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -46,50 +58,65 @@
     <div class="container mx-auto px-6 py-8">
         <!-- Add New Book Button -->
         <div class="mb-4">
-            <button @click="showModal = true" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">Add New Book</button>
+            <button @click="showModal = true; editMode = false; bookData = {
+                id: '',
+                title: '',
+                author: '',
+                description: '',
+                price: '',
+                isbn: '',
+                cover: ''
+            }" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">Add New Book</button>
         </div>
-        <!-- Enhanced Add New Book Modal -->
+        <!-- Enhanced Add/Edit Book Modal -->
         <div x-show="showModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
             <div class="bg-white rounded-xl shadow-sm w-full max-w-3xl overflow-hidden">
                 <div class="border-b px-8 py-4 flex justify-between items-center">
-                    <h4 class="text-xl font-semibold text-gray-800">{{ isset($book) ? 'Edit Book' : 'Add New Book' }}</h4>
+                    <h4 class="text-xl font-semibold text-gray-800" x-text="editMode ? 'Edit Book' : 'Add New Book'"></h4>
                     <button @click="showModal = false" class="text-gray-600 hover:text-gray-800 transition duration-300">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
                 <div class="p-8">
-                    <form action="{{ isset($book) ? route('update-book', ['id' => $book->id]) : route('create-book') }}" method="POST" class="max-w-3xl">
+                    <form x-bind:action="editMode ? '/books/update/' + bookData.id : '{{ route('create-book') }}'" method="POST" class="max-w-3xl">
                         @csrf
-                        @if(isset($book))
-                            @method('PUT')
-                        @endif
+                        <template x-if="editMode">
+                            <input type="hidden" name="_method" value="PUT">
+                        </template>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Book Title</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="title" name="title" value="{{ $book->title ?? '' }}" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    id="title" name="title" x-model="bookData.title" required>
                             </div>
                             <div>
                                 <label for="author" class="block text-sm font-medium text-gray-700 mb-2">Author</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="author" name="author" value="{{ $book->author ?? '' }}" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    id="author" name="author" x-model="bookData.author" required>
                             </div>
                             <div class="md:col-span-2">
                                 <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="description" name="description" rows="4">{{ $book->description ?? '' }}</textarea>
+                                <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    id="description" name="description" rows="4" x-model="bookData.description"></textarea>
                             </div>
                             <div>
                                 <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Price</label>
-                                <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="price" name="price" step="0.01" value="{{ $book->price ?? '' }}" required>
+                                <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    id="price" name="price" step="0.01" x-model="bookData.price" required>
                             </div>
                             <div>
                                 <label for="isbn" class="block text-sm font-medium text-gray-700 mb-2">ISBN</label>
-                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" id="isbn" name="isbn" minlength="13" maxlength="13" value="{{ $book->isbn ?? '' }}" required>
+                                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    id="isbn" name="isbn" minlength="13" maxlength="13" x-model="bookData.isbn" required>
                             </div>
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Cover Image</label>
-                                <input type="url" name="cover" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" placeholder="Enter image URL" value="{{ $book->cover ?? '' }}">
+                                <input type="url" name="cover" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all" 
+                                    placeholder="Enter image URL" x-model="bookData.cover">
                             </div>
                             <div class="mt-6 flex space-x-4">
-                                <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all">{{ isset($book) ? 'Update Book' : 'Create Book' }}</button>
+                                <button type="submit" class="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-all" 
+                                    x-text="editMode ? 'Update Book' : 'Create Book'"></button>
                                 <button type="button" @click="showModal = false" class="px-6 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:ring-4 focus:ring-gray-100 transition-all">Cancel</button>
                             </div>
                         </div>
@@ -130,9 +157,21 @@
                                 <td class="px-6 py-4 text-sm text-center text-gray-600">${{ number_format($book->price) }}</td>
                                 <td class="px-6 py-4 text-sm text-center text-gray-600">
                                     <div class="flex justify-center space-x-3">
-                                        <a href="{{ route('update-book', ['id' => $book->id]) }}?edit=true" class="px-4 py-2 text-md font-medium text-yellow-600 flex items-center">
-                                            <i class="fas fa-edit mr-2"></i>
-                                        </a>
+                                        <button @click="
+                                            editMode = true;
+                                            showModal = true;
+                                            bookData = {
+                                                id: '{{ $book->id }}',
+                                                title: '{{ $book->title }}',
+                                                author: '{{ $book->author }}',
+                                                description: '{{ $book->description }}',
+                                                price: '{{ $book->price }}',
+                                                isbn: '{{ $book->isbn }}',
+                                                cover: '{{ $book->cover }}'
+                                            }
+                                        " class="text-blue-600 hover:text-blue-800 mr-2">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
                                         <form action="{{ route('delete-book', ['id' => $book->id]) }}" method="GET" class="inline">
                                             @csrf
                                             @method('DELETE')

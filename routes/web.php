@@ -22,7 +22,7 @@ Route::get('/booksJson', [BookController::class, 'booksJson'])->name('booksJson'
 Route::get('/book/search/{query}', [BookController::class, 'bookSearch'])->name('book-search');
 Route::get('/books/view/{id}', [BookController::class, 'show'])->name('view-book');
 Route::post('/books/create', [BookController::class, 'createBook'])->name('create-book');
-Route::post('/books/update/{id}', [BookController::class, 'updateBook'])->name('update-book');
+Route::match(['post', 'put'], '/books/update/{id}', [BookController::class, 'updateBook'])->name('update-book');
 Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('delete-book');
 
 // BORROWED
