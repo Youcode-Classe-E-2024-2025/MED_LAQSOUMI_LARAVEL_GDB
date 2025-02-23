@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Libement System</title>
+    <title>Welcome - Libement System</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -13,27 +15,48 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                    },
+                    }
                 }
             }
         }
     </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 flex flex-col min-h-screen font-sans">
-    <header class="bg-gray-800/50 backdrop-blur-lg border-b border-gray-700">
+
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+    <header class="bg-gray-800/50 backdrop-blur-lg border-b border-gray-700 sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl md:text-3xl font-bold">
-                <a href="" class="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent hover:from-blue-400 hover:to-indigo-400 transition-all">
-                    <span>Lib</span>Ement
+                <a href="/" class="bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-all duration-300">
+                    <i class="fas fa-book-open mr-2"></i>
+                    <span class="font-extrabold">Lib</span>Ement
                 </a>
             </h1>
             <nav>
-                <ul class="flex space-x-8">
+                <ul class="flex items-center space-x-6">
                     <li>
-                        <a href="{{ route('register') }}" class="text-gray-300 hover:text-white transition-colors">Register</a>
+                        <a href="{{ route('register') }}" 
+                           class="text-gray-300 hover:text-blue-400 transition-colors duration-200">
+                            <i class="fas fa-user-plus mr-2"></i>Register
+                        </a>
                     </li>
                     <li>
-                        <a href="{{ route('login') }}" class="text-blue-400 font-medium hover:text-blue-300 transition-colors">Login</a>
+                        <a href="{{ route('login') }}" 
+                           class="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg 
+                                  hover:from-blue-600 hover:to-purple-700 transition-all duration-300">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Login
+                        </a>
                     </li>
                 </ul>
             </nav>

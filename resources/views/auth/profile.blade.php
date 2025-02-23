@@ -19,40 +19,85 @@
             }
         }
     </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        .mobile-menu-slide {
+            animation: slideIn 0.3s ease-out;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 flex flex-col min-h-screen font-sans">
     <header class="bg-gray-800/50 backdrop-blur-lg border-b border-gray-700">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">
                 <a href="{{ route('dashboard') }}" class="hover:opacity-80 transition-opacity">
+                    <i class="fas fa-book-open mr-2"></i>
                     <span class="font-extrabold">Lib</span>Ement
                 </a>
             </h1>
-            <nav>
-                <ul class="flex space-x-6">
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="lg:hidden text-gray-300 hover:text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:block">
+                <ul class="flex items-center space-x-8">
                     @if($role === 'user')
-                    <li><a href="{{route('dashboard')}}" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-book mr-2"></i>Books</a></li>
-                    <li><a href="{{ route('myBooks', ['user_id' => $user->id]) }}" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
-                    <li><a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors"><i class="fas fa-user mr-2"></i>Profile</a></li>
-                    <li>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
-                        </form>
-                    </li>
+                        <li><a href="{{route('dashboard')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-book mr-2"></i>Books</a></li>
+                        <li><a href="{{ route('myBooks', ['user_id' => $user->id]) }}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
+                        <li><a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors duration-200"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     @elseif($role === 'admin')
-                    <li><a href="{{route('dashboard')}}" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
-                    <li><a href="{{route('manageBooks')}}" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-book mr-2"></i>Manage Books</a></li>
-                    <li><a href="{{route('manageUsers')}}" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
-                    <li><a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors"><i class="fas fa-user mr-2"></i>Profile</a></li>
+                        <li><a href="{{route('dashboard')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
+                        <li><a href="{{route('manageBooks')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-book mr-2"></i>Manage Books</a></li>
+                        <li><a href="{{route('manageUsers')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
+                        <li><a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors duration-200"><i class="fas fa-user mr-2"></i>Profile</a></li>
+                    @endif
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="text-gray-300 hover:text-white transition-colors"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+                            <button type="submit" class="text-gray-300 hover:text-red-400 transition-colors duration-200">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </button>
                         </form>
                     </li>
-                    @endif
                 </ul>
+            </nav>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden">
+            <nav class="flex flex-col space-y-4 px-6 py-4 bg-gray-800/95 backdrop-blur-lg border-b border-gray-700 animate-fade-in">
+                @if($role === 'user')
+                    <a href="{{route('dashboard')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-book mr-2"></i>Books</a>
+                    <a href="{{ route('myBooks', ['user_id' => $user->id]) }}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-bookmark mr-2"></i>My Books</a>
+                    <a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors duration-200"><i class="fas fa-user mr-2"></i>Profile</a>
+                @elseif($role === 'admin')
+                    <a href="{{route('dashboard')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-chart-line mr-2"></i>Dashboard</a>
+                    <a href="{{route('manageBooks')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-book mr-2"></i>Manage Books</a>
+                    <a href="{{route('manageUsers')}}" class="text-gray-300 hover:text-blue-400 transition-colors duration-200"><i class="fas fa-users mr-2"></i>Manage Users</a>
+                    <a href="{{route('profile')}}" class="text-blue-400 hover:text-blue-300 transition-colors duration-200"><i class="fas fa-user mr-2"></i>Profile</a>
+                @endif
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="text-gray-300 hover:text-red-400 transition-colors duration-200">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </button>
+                </form>
             </nav>
         </div>
     </header>
@@ -161,5 +206,48 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        mobileMenuButton.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            mobileMenu.classList.toggle('hidden');
+            
+            // Update icon
+            const icon = mobileMenuButton.querySelector('i');
+            icon.classList.remove(isMenuOpen ? 'fa-bars' : 'fa-times');
+            icon.classList.add(isMenuOpen ? 'fa-times' : 'fa-bars');
+            
+            if (!mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('mobile-menu-slide');
+            }
+        });
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                mobileMenu.classList.add('hidden');
+                isMenuOpen = false;
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                isMenuOpen = false;
+                const icon = mobileMenuButton.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
 </body>
 </html>
