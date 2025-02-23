@@ -137,7 +137,7 @@
                             value="{{ $name }}" 
                             required 
                             autocomplete="name" 
-                            class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('name') border-red-500 @enderror"
+                            class="w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('name') border-red-500 @enderror"
                         >
                         @error('name')
                             <span class="text-red-400 text-sm mt-1" role="alert">
@@ -157,7 +157,7 @@
                             value="{{ $email }}" 
                             required 
                             autocomplete="email" 
-                            class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('email') border-red-500 @enderror"
+                            class="w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('email') border-red-500 @enderror"
                         >
                         @error('email')
                             <span class="text-red-400 text-sm mt-1" role="alert">
@@ -176,7 +176,7 @@
                             name="password" 
                             required 
                             autocomplete="new-password" 
-                            class="w-full px-4 py-3 bg-gray-900/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('password') border-red-500 @enderror"
+                            class="w-full px-4 py-3 bg-gray-900/50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 text-gray-100 @error('password') border-red-500 @enderror"
                         >
                         @error('password')
                             <span class="text-red-400 text-sm mt-1" role="alert">
