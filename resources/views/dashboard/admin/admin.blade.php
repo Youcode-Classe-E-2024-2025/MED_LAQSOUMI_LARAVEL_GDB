@@ -34,7 +34,7 @@
                     </li>
                     @elseif($role === 'admin')
                     <li><a href="{{route('dashboard')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-chart-line mr-2"></i>Dashboard</a></li>
-                    <li><a href="{{route('manageBooks')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-books mr-2"></i>Manage Books</a></li>
+                    <li><a href="{{route('manageBooks')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-book mr-2"></i>Manage Books</a></li>
                     <li><a href="{{route('manageUsers')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
                     <li><a href="{{route('profile')}}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
@@ -52,7 +52,7 @@
     <main class="container mx-auto mt-8 px-4 flex-1">
         <h2 class="text-2xl font-semibold mb-6">Admin Dashboard</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
             <!-- System Overview -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <h3 class="text-xl font-semibold mb-4 text-center text-blue-600">System Overview</h3>
@@ -77,10 +77,16 @@
                 <h3 class="text-xl font-semibold mb-4">Recent Activities</h3>
                 <ul class="space-y-2">
                     @forelse ($books as $activity)
-                        <li>
-                            <span class="text-gray-600">{{ $activity->description }}</span>
-                            <span class="text-sm text-gray-400">{{ $activity->created_at->diffForHumans() }}</span>
-                            <span class="text-sm text-gray-400">{{ $activity->updated_at->format('Y-m-d') }}</span>
+                        <li class="flex justify-between items-center py-2 border-b border-gray-200">
+                            <span class="text-gray-600 ">{{ $activity->description }}</span>
+                            <span class="text-sm text-gray-400 ">
+                                <i class="fas fa-clock mr-1"></i>
+                                {{ $activity->created_at->diffForHumans() }}
+                            </span>
+                            <span class="text-sm text-gray-400 ">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                {{ $activity->updated_at->format('Y-m-d') }}
+                            </span>
                         </li>
                     @empty
                         <li class="text-gray-600">No recent activities.</li>
