@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\User;
 
 class BookController extends Controller
 {
@@ -13,11 +14,11 @@ class BookController extends Controller
         return response()->json($books);
     }
 
-    public function books($id=null)
+    public function books($id)
     {
         $books = Book::all();
-        $book = Book::find($id);
-        return view('dashboard.admin.manageBooks', ['books' => $books, 'book'=>$book]);
+        $user = User::find($id);
+        return view('dashboard.admin.manageBooks', ['books' => $books, 'user'=>$user]);
     }
 
     public function createBook(Request $request) // Renamed from create to createBook
@@ -71,8 +72,14 @@ class BookController extends Controller
 
     public function show($id)
     {
-        $book = Book::findById($id);
-        return view('dashboard.booksDetaills', ['book' => $book]);
+        $book = Book::find($id);
+        $user = User::find($book->user_id);
+        $users = User::all();
+        return view('dashboard.booksDetaills', [
+            'book' => $book,
+            'user' => $user,
+            'users' => $users
+        ]);
     }
 
 

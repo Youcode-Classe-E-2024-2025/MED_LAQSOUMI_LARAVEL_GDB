@@ -110,19 +110,18 @@
 
 
                         <div class="mt-8 flex space-x-4">
-                            @auth
                             <form action="{{ route('create-borrowed') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                <select name="user_id" class="mr-4 px-4 py-2 border rounded-md">
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
                                 <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
                                     <i class="fas fa-bookmark mr-2"></i> Borrow
                                 </button>
                             </form>
-                            @else
-                            <a href="{{ route('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
-                                <i class="fas fa-bookmark mr-2"></i> Borrow
-                            </a>
-                            @endauth
                             <a href="{{ route('dashboard') }}" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-300 flex items-center">
                                 <i class="fas fa-arrow-left mr-2"></i> Back to Books
                             </a>

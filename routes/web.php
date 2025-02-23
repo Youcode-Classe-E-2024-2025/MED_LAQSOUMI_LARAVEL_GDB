@@ -35,8 +35,4 @@ Route::get('/books/delete/{id}', [BookController::class, 'deleteBook'])->name('d
 // BORROWED
 Route::get('/manageBorrowed', [BorrowedController::class, 'borrowed'])->name('manageBorrowed');
 Route::get('/borrowedJson', [BorrowedController::class, 'borrowedJson'])->name('borrowedJson');
-Route::get('/borrowed/view/{id}', [BorrowedController::class, 'show'])->name('view-borrowed');
 Route::post('/borrowed/create', [BorrowedController::class, 'createBorrowed'])->name('create-borrowed');
-Route::match(['post', 'put'], '/borrowed/update/{id}', [BorrowedController::class, 'updateBorrowed'])->name('update-borrowed');
-Route::get('/borrowed/delete/{id}', [BorrowedController::class, 'deleteBorrowed'])->name('delete-borrowed');
-Route::get('/borrowedByUser/{id}', [BorrowedController::class, 'borrowedBookByUser'])->name('borrowed-book-by-user');

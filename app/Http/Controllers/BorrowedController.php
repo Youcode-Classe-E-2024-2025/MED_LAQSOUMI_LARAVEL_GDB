@@ -8,44 +8,32 @@ use App\Models\User;
 
 class BorrowedController extends Controller
 {
-    public function index()
+    public function borrowed()
     {
         $borrowedBooks = Borrow::with('book', 'user')->borrowed()->get();
         return view('dashboard.admin.borrowed', compact('borrowedBooks'));
     }
 
+    public function borrowedJson()
+    {
+        $borrowedBooks = Borrow::with('book', 'user')->borrowed()->get();
+        return response()->json($borrowedBooks);
+    }
+    
     public function createBorrowed(Request $request)
     {
         $request->validate([
             'book_id' => 'required|exists:books,id',
+            'user_id' => 'required|exists:users,id'
         ]);
         
         Borrow::create([
             'book_id' => $request->book_id,
-            'user_id' => User::id(),
+            'user_id' => $request->user_id,
             'borrowed_at' => now(),
-            'due_date' => now()->addDays(14), // Set due date to 14 days from now
+            'returned_at' => null
         ]);
         
-        return redirect()->route('borrowed.index')->with('success', 'Book borrowed successfully.');
-    }
-
-    public function show($id)
-    {
-        $borrowing = Borrow::with('book', 'user')->findOrFail($id);
-        return response()->json($borrowing);
-    }
-
-    public function deleteBorrowed($id)
-    {
-        $borrowing = Borrow::findOrFail($id);
-        $borrowing->delete();
-        return redirect()->route('borrowed.index')->with('success', 'Book deleted successfully.');
-    }
-
-    public function borrowedBookByUser($id)
-    {
-        $borrowedBooks = Borrow::where('user_id', $id)->get();
-        return response()->json($borrowedBooks);
+        return redirect()->back()->with('success', 'Book borrowed successfully.');
     }
 }
