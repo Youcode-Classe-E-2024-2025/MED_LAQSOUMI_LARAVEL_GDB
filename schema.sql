@@ -1,6 +1,5 @@
 CREATE DATABASE laravel_GDB;
 
-USE laravel_GDB;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -19,8 +18,9 @@ CREATE TABLE books (
     title VARCHAR(255) NOT NULL,
     author VARCHAR(255) NOT NULL,
     description TEXT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    cover VARCHAR(255) NULL,
     isbn VARCHAR(20) UNIQUE NOT NULL,
-    published_at DATE NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -32,7 +32,6 @@ CREATE TABLE borrowings (
     book_id INT NOT NULL,
     borrowed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     returned_at TIMESTAMP NULL,
-    due_at TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,

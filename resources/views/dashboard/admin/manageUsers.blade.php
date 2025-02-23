@@ -161,12 +161,12 @@
                                             password: ''
                                         }
                                     " class="text-blue-400 hover:text-blue-300 transition-colors mr-4">
-                                        <i class="fas fa-edit mr-1"></i> Edit
+                                        <i class="fas fa-edit mr-1"></i>
                                     </button>
                                     <a href="{{ route('delete-user', ['id' => $user->id]) }}" 
                                        onclick="return confirm('Are you sure you want to delete this user?')"
                                        class="text-red-400 hover:text-red-300 transition-colors">
-                                        <i class="fas fa-trash-alt mr-1"></i> Delete
+                                        <i class="fas fa-trash-alt mr-1"></i>
                                     </a>
                                 </td>
                             </tr>

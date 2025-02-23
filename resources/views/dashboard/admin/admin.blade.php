@@ -118,7 +118,7 @@
             <div class="bg-gray-800/50 backdrop-blur-lg rounded-xl border border-gray-700 p-6 animate-fade-in" style="animation-delay: 0.2s">
                 <h3 class="text-xl font-semibold mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">Recent Activities</h3>
                 <ul class="space-y-3">
-                    @forelse ($books as $activity)
+                    @forelse ($books->sortByDesc('created_at')->take(5) as $activity)
                         <li class="flex justify-between items-center py-3 border-b border-gray-700 hover:bg-gray-700/50 rounded-lg px-3 transition-colors">
                             <span class="text-gray-300">{{ $activity->description }}</span>
                             <div class="flex flex-col items-end text-sm">

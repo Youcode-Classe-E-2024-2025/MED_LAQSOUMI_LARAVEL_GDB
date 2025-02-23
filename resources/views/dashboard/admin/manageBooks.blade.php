@@ -164,7 +164,7 @@
                                                 cover: '{{ $book->cover }}'
                                             }
                                         " class="text-blue-400 hover:text-blue-300 transition-colors duration-200">
-                                            <i class="fas fa-edit mr-1"></i> Edit
+                                            <i class="fas fa-edit mr-1"></i>
                                         </button>
                                         <form action="{{ route('delete-book', ['id' => $book->id]) }}" method="GET" class="inline">
                                             @csrf
@@ -172,7 +172,7 @@
                                             <button type="submit" 
                                                     class="text-red-400 hover:text-red-300 transition-colors duration-200"
                                                     onclick="return confirm('Are you sure you want to delete this book?')">
-                                                <i class="fas fa-trash-alt mr-1"></i> Delete
+                                                <i class="fas fa-trash-alt mr-1"></i>
                                             </button>
                                         </form>
                                     </div>
