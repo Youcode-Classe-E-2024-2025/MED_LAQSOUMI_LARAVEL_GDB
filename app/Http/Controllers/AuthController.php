@@ -68,12 +68,14 @@ class AuthController extends Controller
     if (session()->has('email')) {
         $sessionRole = session()->get('role');
         $books = Book::all(); // Fetch all books
+        $user = User::where('email', session()->get('email'))->first();
 
         if ($sessionRole == 'admin') {
             return view('dashboard.admin.admin', [
                 'email' => session()->get('email'),
                 'role' => $sessionRole,
-                'name' => User::where('email', session()->get('email'))->first()->name,
+                'name' => $user->name,
+                'user' => $user,
                 'users' => User::all(), // Fetch all users
                 'books' => $books, // Pass books to the view
                 'borrows' => Borrow::getAllBorrowings() // Fetch all borrows
@@ -82,8 +84,9 @@ class AuthController extends Controller
             return view('dashboard.user', [
                 'email' => session()->get('email'),
                 'role' => $sessionRole,
-                'name' => User::where('email', session()->get('email'))->first()->name,
-                'created_at' => User::where('email', session()->get('email'))->first()->created_at,
+                'name' => $user->name,
+                'user' => $user,
+                'created_at' => $user->created_at,
                 'books' => $books // Pass books to the view
             ]);
         }
@@ -94,11 +97,17 @@ class AuthController extends Controller
 
     public function profile ()
     {
+        $user = User::where('email', session()->get('email'))->first();
+        $email = session()->get('email');
+        $role = session()->get('role');
+        $name = $user->name;
+        $created_at = $user->created_at;
         return view('auth.profile', [
-            'email' => session()->get('email'),
-            'role' => session()->get('role'),
-            'name' => User::where('email', session()->get('email'))->first()->name,
-            'created_at' => User::where('email', session()->get('email'))->first()->created_at
+            'user' => $user,
+            'email' => $email,
+            'role' => $role,
+            'name' => $name,
+            'created_at' => $created_at
         ]);
     }
 

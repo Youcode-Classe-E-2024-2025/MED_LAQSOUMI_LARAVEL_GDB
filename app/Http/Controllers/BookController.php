@@ -14,7 +14,7 @@ class BookController extends Controller
         return response()->json($books);
     }
 
-    public function books($id)
+    public function books($id=null)
     {
         $books = Book::all();
         $user = User::find($id);

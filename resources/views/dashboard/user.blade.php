@@ -24,7 +24,7 @@
             <nav>
                 <ul class="flex space-x-6">
                     <li><a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-book mr-2"></i>Books</a></li>
-                    <li><a href="" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
+                    <li><a href="{{ route('myBooks', ['user_id' => $user->id]) }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-bookmark mr-2"></i>My Books</a></li>
                     <li><a href="{{ route('profile') }}" class="text-gray-600 hover:text-blue-600 transition duration-300"><i class="fas fa-user mr-2"></i>Profile</a></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">

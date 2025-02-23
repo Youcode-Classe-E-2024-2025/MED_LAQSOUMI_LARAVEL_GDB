@@ -30,4 +30,12 @@ class Borrow extends Model
         $borrowings = Borrow::all();
         return $borrowings;
     }
+
+    public static function getBorrowingByUserId($user_id)
+    {
+        return Borrow::with('book')
+            ->where('user_id', $user_id)
+            ->whereNull('returned_at')
+            ->get();
+    }
 }

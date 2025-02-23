@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Borrow;
 use App\Models\User;
+use App\Models\Borrow;
 
 class BorrowedController extends Controller
 {
@@ -34,6 +34,17 @@ class BorrowedController extends Controller
             'returned_at' => null
         ]);
         
-        return redirect()->back()->with('success', 'Book borrowed successfully.');
+        return redirect()->route('myBooks', ['user_id' => $request->user_id])->with('success', 'Book borrowed successfully.');
+    }
+
+    public function myBooks($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $borrowedBooksByUser = Borrow::getBorrowingByUserId($user_id);
+            
+        return view('dashboard.myBooks', [
+            'borrowedBooksByUser' => $borrowedBooksByUser,
+            'user' => $user
+        ]);
     }
 }
